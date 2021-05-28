@@ -1,5 +1,4 @@
 # Bistro List
----
 利用 Node.js 和 Express 打造一個簡單的餐廳清單網頁。
 
 ## 基本功能
