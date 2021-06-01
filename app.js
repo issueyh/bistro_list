@@ -51,7 +51,33 @@ app.get('/restaurants/:id', (req, res) => {
     const id = req.params.id
     return Bistro.findById(id)
         .lean()
-        .then(restaurant => res.render('show', { restaurant: restaurant }))
+        .then(restaurant => res.render('show', { restaurant }))
+        .catch(error => console.log(error))
+})
+
+app.get('/restaurants/:id/edit', (req, res) => {
+    const id = req.params.id
+    return Bistro.findById(id)
+        .lean()
+        .then(restaurant => res.render('edit', { restaurant }))
+        .catch(error => console.log(error))
+})
+app.post('/restaurants/:id/edit', (req, res) => {
+    const id = req.params.id
+    const newBistro = req.body
+    return Bistro.findById(id)
+        .then(restaurant => {
+            restaurant.name = newBistro.name
+            restaurant.category = newBistro.category
+            restaurant.image = newBistro.image
+            restaurant.location = newBistro.location
+            restaurant.phone = newBistro.phone
+            restaurant.google_map = newBistro.google_map
+            restaurant.rating = newBistro.rating
+            restaurant.description = newBistro.description
+            return restaurant.save()
+        })
+        .then(() => res.redirect(`/restaurants/${id}`))
         .catch(error => console.log(error))
 })
 
