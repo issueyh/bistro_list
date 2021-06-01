@@ -10,11 +10,11 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-    res.render('index', { restaurants: restaurantList.results})
+    res.render('index', { restaurants: restaurantList.results })
 })
 app.get('/restaurants/:id', (req, res) => {
     const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.id)
-    res.render('show', {restaurant: restaurant})
+    res.render('show', { restaurant: restaurant })
 })
 app.get('/search', (req, res) => {
     const keyword = req.query.keyword
