@@ -7,7 +7,7 @@ const bistroSchema = new Schema({
     },
     name_en: {
         type: String,
-        required: true
+        required: false
     },
     category: {
         type: String,
