@@ -25,9 +25,7 @@
                 {{#each restaurants}}
                 <a href="/restaurants/{{this._id}}" class="text-secondary">
                     <div class="card mb-3">
-                        <img class="card-img-top"
-                            src="{{this.image}}"
-                            alt="{{this.name}}">
+                        <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
                         <div class="card-body p-3">
                             <h6 class="card-title mb-1">{{this.name}}</h6>
 
@@ -42,18 +40,23 @@
 
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-primary mr-2">
-                                    <a href="/restaurants/{{this._id}}" class="text-light" style="text-decoration: none;">詳細資料</a>
+                                    <a href="/restaurants/{{this._id}}" class="text-light"
+                                        style="text-decoration: none;">詳細資料</a>
                                 </button>
-                                <button class="btn btn-info">
-                                    <a href="/restaurants/{{this._id}}/edit" class="text-light" style="text-decoration: none;">編輯</a>
+                                <button class="btn btn-info mr-2">
+                                    <a href="/restaurants/{{this._id}}/edit" class="text-light"
+                                        style="text-decoration: none;">編輯</a>
                                 </button>
+                                <form action="/restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-danger">移除</button>
+                                </form>
                             </div>
 
                         </div>
                     </div>
                 </a>
                 {{/each}}
-                
+
             </div>
         </div>
     </div>
