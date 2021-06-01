@@ -39,3 +39,4 @@ http://localhost:3000
 * Node.js: 10.15.0
 * Express: 4.17.1
 * Express-Handlebars: 5.3.2
+* mongoose: 5.12.12
