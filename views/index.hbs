@@ -47,9 +47,32 @@
                                     <a href="/restaurants/{{this._id}}/edit" class="text-light"
                                         style="text-decoration: none;">編輯</a>
                                 </button>
-                                <form action="/restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
-                                    <button type="submit" class="btn btn-danger">移除</button>
-                                </form>
+
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCheck" data-id="{{ this._id }}">
+                                    移除
+                                </button>
+
+                                {{!-- modal check delete --}}
+                                <div class="modal fade" id="deleteCheck" tabindex="-1" role="dialog" aria-labelledby="deleteCheckBox"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                確定要刪除「{{this.name}}」?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                <form action="/restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
+                                                    <button type="submit" class="btn btn-danger">移除</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>

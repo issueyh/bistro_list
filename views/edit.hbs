@@ -10,12 +10,12 @@
         <select class="form-control" name="category" id="category" selected={{ restaurant.category }}
             aria-label="category" placeholder="請選擇類別" required>
             <option value="0" style="display:none">請選擇</option>
-            <option value="1">日式料理</option>
-            <option value="2">中東料理</option>
-            <option value="3">義式餐廳</option>
-            <option value="4">美式</option>
-            <option value="5">酒吧</option>
-            <option value="6">咖啡</option>
+            <option value="日式料理">日式料理</option>
+            <option value="中東料理">中東料理</option>
+            <option value="義式餐廳">義式餐廳</option>
+            <option value="美式">美式</option>
+            <option value="酒吧">酒吧</option>
+            <option value="咖啡">咖啡</option>
         </select>
     </div>
     <div class="form-group">
@@ -48,7 +48,7 @@
         <label for="description">餐廳簡介</label>
         <textarea type="text" class="form-control" name="description" id="description" aria-label="description"
             placeholder="請輸入餐廳簡介 如：加上一股對比利時啤酒的熱情， 於是「Bravo Beer布娜飛比利時啤酒餐廳」在2006年誕生了..."
-            required>{{ restaurant.description }}"</textarea>
+            required>{{ restaurant.description }}</textarea>
     </div>
     <div class="d-flex flex-row justify-content-center col-12">
         <button type="submit" class="btn btn-info mr-2">儲存</button>
