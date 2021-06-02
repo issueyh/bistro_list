@@ -1,5 +1,5 @@
 # Bistro List
-利用 Node.js 和 Express 打造一個簡單的餐廳清單網頁。
+利用 Node.js、Express 和 mongoose 打造一個簡單的餐廳清單網頁。
 
 ## 基本功能
 使用者可以在首頁看到所有餐廳與它們的簡單資料：
@@ -10,8 +10,10 @@
 
 使用者可以透過搜尋餐廳名稱來找到特定的餐廳。
 
+使用者可以新增、瀏覽、修改、刪除餐廳名單。
+
 ## 專案畫面
-![img](https://github.com/issueyh/bistro_list/blob/main/public/img/bistro.jpg)
+![img](https://github.com/issueyh/bistro_list/blob/main/public/img/bistroCRUD.jpg)
 
 ## 安裝流程
 1. 打開你的 terminal，Clone 此專案至本機電腦
