@@ -50,7 +50,7 @@ header {
   border-color: #ced4da;
 }
 
-// card-style
+ /* card-style */
 
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -78,6 +78,21 @@ header {
   text-align: center;
   font-size: 3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.invalid-feedback, .valid-feedback {
+  display: none;
+  font-size: 0.8em;
+}
+.invalid-feedback {
+  color: red
+}
+.valid-feedback {
+  color: green
+}
+form.was-validated .form-control:invalid ~ .invalid-feedback,
+form.was-validated .form-control:valid ~ .valid-feedback {
+  display: initial;   /* 顯示 */
 }
 
 @media screen and (max-width: 992px) {
