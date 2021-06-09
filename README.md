@@ -13,7 +13,7 @@
 使用者可以新增、瀏覽、修改、刪除餐廳名單。
 
 ## 專案畫面
-![img](https://github.com/issueyh/bistro_list/blob/main/public/img/bistroCRUD.jpg)
+![img](https://github.com/issueyh/bistro_list/blob/main/public/img/bistroRefactor.jpg)
 
 ## 安裝流程
 1. 打開你的 terminal，Clone 此專案至本機電腦
@@ -42,3 +42,5 @@ http://localhost:3000
 * Express: 4.17.1
 * Express-Handlebars: 5.3.2
 * mongoose: 5.12.12
+* method-override: 3.0.0
+* just-handlebars-helpers: 1.0.18
