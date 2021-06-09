@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const routes = require('./routes')
+const handlebars = require('handlebars')
+const helpers = require('just-handlebars-helpers')
 
 mongoose.connect('mongodb://localhost/bistro-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -24,6 +26,8 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes)
+
+helpers.registerHelpers(handlebars)
 
 app.listen(port, () => {
     console.log(`Express is running on http://localhost:${port}`)
