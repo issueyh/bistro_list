@@ -2,6 +2,8 @@
 const express = require('express')
 const router = express.Router()
 const Bistro = require('../../models/bistro')
+const { v4: uuidv4 } = require('uuid')
+uuidv4()
 
 router.get('/create', (req, res) => {
     return res.render('create')
@@ -28,7 +30,7 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    const id = req.params.id
+    const id = uuidParse(req.params.id)
     return Bistro.findById(id)
         .lean()
         .then(restaurant => res.render('show', { restaurant }))
@@ -40,7 +42,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
-    const id = req.params.id
+    const id = uuidParse(req.params.id)
     return Bistro.findById(id)
         .lean()
         .then(restaurant => res.render('edit', { restaurant }))
@@ -51,7 +53,7 @@ router.get('/:id/edit', (req, res) => {
         })
 })
 router.put('/:id', (req, res) => {
-    const id = req.params.id
+    const id = uuidParse(req.params.id)
     const newBistro = req.body
     return Bistro.findById(id)
         .then(restaurant => {
@@ -74,7 +76,7 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    const id = req.params.id
+    const id = uuidParse(req.params.id)
     return Bistro.findById(id)
         .then(restaurant => restaurant.remove())
         .then(() => res.redirect('/'))
