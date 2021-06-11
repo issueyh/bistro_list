@@ -2,7 +2,7 @@
 <div class="container search-bar">
     <div class="search-bar-outer">
         <div class="search-bar-inner d-flex justify-content-around flex-wrap">
-            <form action="/search">
+            <form action="/restaurants/searches">
                 <h4 class="mb-2">尋找餐廳：</h4>
                 <div class="input-group">
                     <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類"
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </form>
-            <form action="/sort" method="POST">
+            <form action="/restaurants/sort" method="POST">
                 <h4 class="mb-2">排序：</h4>
                 <select class="form-control" id="sortForm" name="sort" onchange="this.form.submit()">
                     <option value="0" style="display:none">Sort</option>

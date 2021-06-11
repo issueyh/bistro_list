@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         .catch(error => console.log(error))
 })
 
-router.get('/search', (req, res) => {
+router.get('/restaurants/searches', (req, res) => {
     const keyword = req.query.keyword
     Bistro.find({
         "$or": [
@@ -24,7 +24,7 @@ router.get('/search', (req, res) => {
         .catch(error => console.log(error))
 })
 
-router.post('/sort', (req, res) => {
+router.post('/restaurants/sort', (req, res) => {
     const sortOption = req.body.sort
     const sortTerm = sortItem(req.body.sort)
     Bistro.find()
