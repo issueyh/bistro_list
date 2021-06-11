@@ -1,6 +1,15 @@
 <div class="container">
     <form action="/restaurants" method="POST" class="col-12 d-flex flex-column align-items-around mt-5 mb-5" novalidte>
         <h1>新增餐廳名單</h1>
+        <!--顯示錯誤訊息的程式碼-->
+        {{#each errorMessages}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ this.msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {{/each}}
         <div class="form-group">
             <label for="name">餐廳名稱</label>
             <input type="text" class="form-control" name="name" id="name" aria-label="name" placeholder="請輸入餐廳名稱 如：布娜飛比利時啤酒餐廳"
@@ -16,7 +25,7 @@
             <label for="category">餐廳類別</label>
             <select class="form-control" name="category" id="category" aria-label="category"
                 placeholder="請選擇類別" required pattern=".*\S.*">
-                <option value="0" style="display:none">請選擇</option>
+                <option value="" style="display:none;">請選擇</option>
                 <option value="日式料理">日式料理</option>
                 <option value="中東料理">中東料理</option>
                 <option value="義式餐廳">義式餐廳</option>
