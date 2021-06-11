@@ -20,7 +20,11 @@ router.post('/', (req, res) => {
     })
     return restaurant.save()
         .then(() => res.redirect('/'))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 router.get('/:id', (req, res) => {
@@ -28,7 +32,11 @@ router.get('/:id', (req, res) => {
     return Bistro.findById(id)
         .lean()
         .then(restaurant => res.render('show', { restaurant }))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 router.get('/:id/edit', (req, res) => {
@@ -36,7 +44,11 @@ router.get('/:id/edit', (req, res) => {
     return Bistro.findById(id)
         .lean()
         .then(restaurant => res.render('edit', { restaurant }))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 router.put('/:id', (req, res) => {
     const id = req.params.id
@@ -54,7 +66,11 @@ router.put('/:id', (req, res) => {
             return restaurant.save()
         })
         .then(() => res.redirect(`/restaurants/${id}`))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 router.delete('/:id', (req, res) => {
@@ -62,7 +78,11 @@ router.delete('/:id', (req, res) => {
     return Bistro.findById(id)
         .then(restaurant => restaurant.remove())
         .then(() => res.redirect('/'))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 // 匯出路由器

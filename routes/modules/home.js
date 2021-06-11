@@ -8,7 +8,11 @@ router.get('/', (req, res) => {
     Bistro.find()
         .lean()
         .then(restaurants => res.render('index', { restaurants }))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 router.get('/restaurants/searches', (req, res) => {
@@ -21,7 +25,11 @@ router.get('/restaurants/searches', (req, res) => {
     })
         .lean()
         .then(restaurants => res.render('index', { restaurants }))
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 router.post('/restaurants/sort', (req, res) => {
@@ -31,7 +39,11 @@ router.post('/restaurants/sort', (req, res) => {
         .lean()
         .sort(sortTerm)
         .then(restaurants => res.render('index', { restaurants, sortOption }))
-        .catch(error => console.error(error))
+        .catch(error => {
+            console.log(error)
+            res.redirect('/error', errorMsg)
+            res.status(500).json({ error: error.message })
+        })
 })
 
 // 匯出路由器
