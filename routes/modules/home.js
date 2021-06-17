@@ -9,9 +9,7 @@ router.get('/', (req, res) => {
         .lean()
         .then(restaurants => res.render('index', { restaurants }))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 
@@ -26,9 +24,7 @@ router.get('/restaurants/searches', (req, res) => {
         .lean()
         .then(restaurants => res.render('index', { restaurants }))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 
@@ -40,9 +36,7 @@ router.post('/restaurants/sort', (req, res) => {
         .sort(sortTerm)
         .then(restaurants => res.render('index', { restaurants, sortOption }))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 

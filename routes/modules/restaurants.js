@@ -1,21 +1,25 @@
 // 引用 Express 與 Express 路由器
 const express = require('express')
-const { check } = require('express-validator')
+const { check, buildCheckFunction } = require('express-validator')
+const checkParams = buildCheckFunction(['body', 'query', 'params'])
+const mongoObjectID = require('mongoose').Types.ObjectId
 const router = express.Router()
 const Bistro = require('../../models/bistro')
+const { handleErrorFunc } = require('../../public/javascripts/handleErrorFunc')
 
 router.get('/create', (req, res) => {
     return res.render('create')
 })
 router.post('/', [
-    check('name').isLength({ min: 1, max: 20 }).isEmpty(),
-    check('category').contains().isEmpty(),
-    check('image').isMimeType().isEmpty(),
-    check('location').isLength({ min: 3 }).isEmpty(),
-    check('phone').isIMEI('## #### ####').isEmpty(),
-    check('google_map').isURL().isEmpty(),
-    check('rating').isFloat({ min: 0, max: 5.0 }).isEmpty(),
-    check('description').isLength({ max: 500 }).isEmpty()
+    checkParams('name').isLength({ min: 1, max: 20 }),
+    checkParams('category').contains(),
+    checkParams('image').isMimeType(),
+    checkParams('location').isLength({ min: 3 }),
+    checkParams('phone').isIMEI('## #### ####'),
+    checkParams('google_map').isURL(),
+    checkParams('rating').isFloat({ min: 0, max: 5.0 }),
+    checkParams('description').isLength({ max: 500 }),
+    handleErrorFunc
 ], (req, res) => {
     const { name, category, image, location, phone, google_map, rating, description } = req.body
     const restaurant = new Bistro({
@@ -31,23 +35,22 @@ router.post('/', [
     return restaurant.save()
         .then(() => res.redirect('/'))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 
 router.get('/:id', [
-    check('id').isUUID()
+    check('id')
+        .custom((val) => mongoObjectID.isValid(val))
+        .withMessage('Not a valid id'),
+    handleErrorFunc
 ], (req, res) => {
     const id = req.params.id
     return Bistro.findById(id)
         .lean()
         .then(restaurant => res.render('show', { restaurant }))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 
@@ -57,9 +60,7 @@ router.get('/:id/edit', (req, res) => {
         .lean()
         .then(restaurant => res.render('edit', { restaurant }))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 router.put('/:id', (req, res) => {
@@ -79,9 +80,7 @@ router.put('/:id', (req, res) => {
         })
         .then(() => res.redirect(`/restaurants/${id}`))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 
@@ -91,9 +90,7 @@ router.delete('/:id', (req, res) => {
         .then(restaurant => restaurant.remove())
         .then(() => res.redirect('/'))
         .catch(error => {
-            console.log(error)
-            res.redirect('/error', errorMsg)
-            res.status(500).json({ error: error.message })
+            res.status(422).render('error', { errMsg: error.msg })
         })
 })
 
